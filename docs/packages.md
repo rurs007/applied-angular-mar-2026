@@ -33,7 +33,6 @@ For Icons, I use `ng-icons` with the `lucide` [Icon pack](https://lucide.dev/ico
 - `@ng-icons/core`
 - `@ng-icons/lucide`
 
-
 ## State
 
 All from the fine folks at [ngrx.io](https://ngrx.io)

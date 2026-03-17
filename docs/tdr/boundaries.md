@@ -16,12 +16,12 @@ The `app` root (`src/app/` itself, including `app.ts`, `app.routes.ts`, and `app
 
 Within an area, folders are tagged by type and form a strict hierarchy. Higher-level types may depend on lower-level ones, but not the reverse.
 
-| Type      | Can import from           |
-| --------- | ------------------------- |
-| `feature` | `ui`, `data`, `util`      |
-| `ui`      | `data`, `util`            |
-| `data`    | `util`                    |
-| `util`    | nothing (outside itself)  |
+| Type      | Can import from          |
+| --------- | ------------------------ |
+| `feature` | `ui`, `data`, `util`     |
+| `ui`      | `data`, `util`           |
+| `data`    | `util`                   |
+| `util`    | nothing (outside itself) |
 
 These rules apply within the same area. Cross-area imports are blocked regardless of type (except from `area:shared`).
 

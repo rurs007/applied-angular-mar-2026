@@ -18,12 +18,12 @@ ng generate feature-landing <name> [--title="Display Name"] [--icon=lucideIconNa
 
 ### Options
 
-| Option | Required | Default | Description |
-|---|---|---|---|
-| `name` | yes | — | kebab-case identifier, e.g. `orders`, `product-catalog` |
-| `--title` | no | Title-cased name | Text shown in the nav sidebar |
-| `--icon` | no | `lucideCircle` | Any [Lucide icon](https://lucide.dev/icons/) name |
-| `--path` | no | same as `name` | URL segment, if different from `name` |
+| Option    | Required | Default          | Description                                             |
+| --------- | -------- | ---------------- | ------------------------------------------------------- |
+| `name`    | yes      | —                | kebab-case identifier, e.g. `orders`, `product-catalog` |
+| `--title` | no       | Title-cased name | Text shown in the nav sidebar                           |
+| `--icon`  | no       | `lucideCircle`   | Any [Lucide icon](https://lucide.dev/icons/) name       |
+| `--path`  | no       | same as `name`   | URL segment, if different from `name`                   |
 
 ### Example
 
