@@ -5,7 +5,9 @@ import { PageLayout } from '@ht/shared/ui-common/layouts/page';
   selector: 'ht-signalsdemos-home-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PageLayout],
-  template: `<app-ui-page title="Signals"></app-ui-page>`,
+  template: `<app-ui-page title="Signals">
+    <p>Howdy</p>
+  </app-ui-page>`,
   styles: ``,
 })
 export class HomePage {}

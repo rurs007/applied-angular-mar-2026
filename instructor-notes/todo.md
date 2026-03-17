@@ -1,6 +1,9 @@
-- [ ] - Students: During lunch - In the VM, log into your Github account.
+- [x] - Students: During lunch - In the VM, log into your Github account.
     - [ ] git config --global user.name ""
     - [ ] git config --global user.email ""
     - [ ] git init
     - [ ] git add .
     - [ ] git commit -m "Message"
+- [ ] -- if the value of current is... (fizz buzz? odd even?)
+- [ ] -- timer?
+- [ ] -- prefs.
