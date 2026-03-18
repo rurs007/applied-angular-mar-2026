@@ -1,7 +1,7 @@
 # Pomodoro Timer Lab
 
-> **Beginner Track** — This lab is designed for developers who want more step-by-step guidance.
-> If you're comfortable with Angular signals and want a bigger challenge, try the [Text Analyzer lab](./text-analyzer.md) instead.
+> This lab is designed for developers who want more step-by-step guidance.
+> If you're comfortable with Angular signals and want a bigger challenge, try the [Text Analyzer lab](./text-analyzer.md) instead, or do this one as a "warm up", and do the text analyzer later (or on Thursday)
 
 The [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique) is a time-management method where you work in focused sessions (typically 25 minutes) separated by short breaks (5 minutes). You'll build a working Pomodoro timer that teaches:
 
@@ -42,7 +42,9 @@ Create a new file at:
 src/app/areas/pomodoro/pomodoro-landing/internal/pages/timer.ts
 ```
 
-Name the component class `TimerPage` with selector `ht-pomodoro-timer-page`.
+Name the component class `TimerPage` with selector `ht-pomodoro-pages-timer`.
+
+**Hint**: You can use the `ngp` snippet here.
 
 In the template, use the `PageLayout` component (already used in the generated `home.ts`):
 
@@ -347,7 +349,7 @@ src/app/areas/pomodoro/pomodoro-landing/store.ts
 ```typescript
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 
-export const PomodoroStore = signalStore(
+export const pomodoroStore = signalStore(
   { providedIn: 'root' },
   withState({
     workMinutes: 25,

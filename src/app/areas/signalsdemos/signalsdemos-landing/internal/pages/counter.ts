@@ -1,8 +1,8 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
-import { PageLayout } from '@ht/shared/ui-common/layouts/page';
+import { Component, computed, effect, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { FizzBuzz } from '../fizz-buzz';
+import { PageLayout } from '@ht/shared/ui-common/layouts/page';
 import { counterStore } from '../counter-store';
+import { FizzBuzz } from '../fizz-buzz';
 
 @Component({
   selector: 'app-home-pages-counter',
@@ -19,10 +19,12 @@ import { counterStore } from '../counter-store';
       >
         -
       </button>
-      <span class="text-3xl p-4">{{ store.current() }}</span
-      ><span>{{ emoji() }}</span>
+      <span class="text-3xl p-4">{{ store.current() }}</span>
 
       <button (click)="store.increment()" class="btn btn-circle btn-success">+</button>
+    </div>
+    <div class="p-4 flex flex-row items-center justify-center text-2xl gap-2">
+      {{ emoji() }}
     </div>
     <div class="p-8">
       <button
@@ -56,5 +58,5 @@ export class CounterPage {
     });
   }
 
-  emoji = computed(() => '💾'.repeat(this.store.current()));
+  emoji = computed(() => '🐵'.repeat(this.store.current()));
 }
