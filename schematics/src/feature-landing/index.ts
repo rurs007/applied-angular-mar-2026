@@ -95,7 +95,7 @@ function addNavLink(name: string, path: string, title: string, icon: string): Ru
         throw new SchematicsException(`Could not find closing "])" for links signal in ${appPath}`);
       }
       const recorder = tree.beginUpdate(appPath);
-      recorder.insertLeft(closeIndex, `, ${newLink}`);
+      recorder.insertLeft(closeIndex, `\n  ${newLink},\n`);
       tree.commitUpdate(recorder);
     }
 
