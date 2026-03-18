@@ -73,8 +73,8 @@ const fakeResources = [
   },
 ];
 
-export const handers = [
-  http.get('/api/resources', async () => {
+export const resourceHandlers = [
+  http.get('https://ang.hypertheory-labs.com/api/resources', async () => {
     await delay();
     return HttpResponse.json(fakeResources);
   }),

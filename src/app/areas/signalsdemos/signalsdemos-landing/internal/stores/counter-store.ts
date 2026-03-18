@@ -39,7 +39,7 @@ export const counterStore = signalStore(
   }),
   withHooks({
     onInit() {
-      console.log('Created a counter store....again');
+      console.log('Created a counter store..again!');
 
       // make an api call or whatever to get the saved value.
     },
