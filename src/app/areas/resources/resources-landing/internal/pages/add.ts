@@ -8,18 +8,55 @@ import { form, FormField, FormRoot, minLength, required } from '@angular/forms/s
   imports: [PageLayout, FormField, FormRoot],
   template: `<app-ui-page title="Add a Link">
     <form [formRoot]="form">
-      <div>
-        <label for="title">Title</label
-        ><input class="input" [formField]="form.title" id="title" type="text" />
+      <div class="form-control p-4 ">
+        <label class="label validator" for="title"
+          ><span class="label-text font-medium">Title</span></label
+        >
+        <input
+          class="input input-sm "
+          [class.input-error]="
+            form.title().invalid() && (form.title().dirty() || form.title().touched())
+          "
+          [formField]="form.title"
+          id="title"
+          type="text"
+        />
+        @if (form.title().invalid() && (form.title().dirty() || form.title().touched())) {
+          @for (e of form.title().errors(); track e) {
+            <p class="text-sm text-error ml-24 pt-4">{{ e.message }}</p>
+          }
+        }
       </div>
-      <div>
-        <label for="url">URL</label
-        ><input class="input" id="url" [formField]="form.url" type="text" />
+      <div class="form-control p-4">
+        <label class="label validator" for="url"
+          ><span class="label-text font-medium">URL</span></label
+        >
+        <input
+          class="input input-sm "
+          id="url"
+          [formField]="form.url"
+          type="text"
+          [class.input-error]="form.url().invalid() && (form.url().dirty() || form.url().touched())"
+        />
+        @if (form.url().invalid() && (form.url().dirty() || form.url().touched())) {
+          @for (e of form.url().errors(); track e) {
+            <p class="text-sm text-error ml-24 pt-4">{{ e.message }}</p>
+          }
+        }
       </div>
-      <button class="btn btn-primary" type="submit">Add Link</button>
+
+      <div class="pt-4 ">
+        <button class="btn btn-sm p-4 btn-primary" type="submit">Add Link</button>
+      </div>
     </form>
   </app-ui-page>`,
-  styles: ``,
+  styles: `
+    .form-control {
+      label {
+        padding-right: 2rem;
+      }
+    }
+  `,
 })
 export class AddPage {
   #model = signal<ResourceApiCreateModel>({ title: '', url: '' });

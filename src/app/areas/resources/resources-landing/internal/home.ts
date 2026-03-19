@@ -18,5 +18,9 @@ export class Home {
       title: 'Add a Link',
       path: 'add',
     },
+    {
+      title: 'Add a Link Alt',
+      path: 'add-2',
+    },
   ]);
 }
