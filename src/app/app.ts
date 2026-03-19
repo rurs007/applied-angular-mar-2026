@@ -119,5 +119,11 @@ export class App {
     { path: '/demos', title: 'Signals', icon: 'lucideSignpostBig' },
 
     { path: '/resources', title: 'Developer Resources', icon: 'lucideNewspaper' },
+
+    { path: '/books', title: 'Books', icon: 'lucideTimer' },
+
+    { path: '/pomodorofinal', title: 'Pomodoro Final', icon: 'lucideTimer' },
+
+    { path: '/text-analyzer-final', title: 'Text Analyzer Final', icon: 'lucideFileText' },
   ]);
 }

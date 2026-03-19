@@ -29,6 +29,25 @@ const realRoutes: Routes = [
         (r) => r.resourcesFeatureRoutes,
       ),
   },
+  {
+    path: 'books',
+    loadChildren: () =>
+      import('./areas/books/books-landing/books.routes').then((r) => r.booksFeatureRoutes),
+  },
+  {
+    path: 'pomodorofinal',
+    loadChildren: () =>
+      import('./areas/pomodorofinal/pomodorofinal-landing/pomodorofinal.routes').then(
+        (r) => r.pomodorofinalFeatureRoutes,
+      ),
+  },
+  {
+    path: 'text-analyzer-final',
+    loadChildren: () =>
+      import('./areas/text-analyzer-final/text-analyzer-final-landing/text-analyzer-final.routes').then(
+        (r) => r.textAnalyzerFinalFeatureRoutes,
+      ),
+  },
 ];
 
 const devRoutes: Routes = [
