@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { Home } from './internal/home';
-import { HomePage } from './internal/pages/home';
 import { TimerPage } from './internal/pages/timer';
 import { PrefsPage } from './internal/pages/prefs';
 

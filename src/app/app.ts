@@ -122,7 +122,7 @@ export class App {
 
     { path: '/books', title: 'Books', icon: 'lucideTimer' },
 
-    { path: '/pomodorofinal', title: 'Pomodoro Final', icon: 'lucideTimer' },
+    { path: '/pomodorofinal', title: 'Rakib timer final', icon: 'lucideTimer' },
 
     { path: '/text-analyzer-final', title: 'Text Analyzer Final', icon: 'lucideFileText' },
   ]);

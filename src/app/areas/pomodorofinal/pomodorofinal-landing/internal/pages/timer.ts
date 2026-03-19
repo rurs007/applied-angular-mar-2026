@@ -15,6 +15,35 @@ import { PomodoroStore } from '../../store';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PageLayout],
   template: `
+    <app-ui-page title="Rakib Timer">
+      <div class="flex flex-col items-center gap-6 py-4">
+        <div class="badge badge-lg badge-info">Rakib Timer</div>
+
+        <div
+          class="radial-progress text-2xl font-mono font-bold transition-all"
+          [style.--value]="rakibProgressPercent()"
+          [style.--size]="'12rem'"
+          [style.--thickness]="'8px'"
+          role="progressbar"
+          [attr.aria-valuenow]="rakibProgressPercent()"
+          data-testid="rakib-time-display"
+        >
+          {{ rakibFormattedTime() }}
+        </div>
+
+        <div class="flex gap-4">
+          <button
+            class="btn btn-primary w-24"
+            [class.btn-warning]="rakibIsRunning()"
+            (click)="rakibToggleTimer()"
+          >
+            {{ rakibStartLabel() }}
+          </button>
+          <button class="btn btn-ghost" (click)="rakibReset()">Reset</button>
+        </div>
+      </div>
+    </app-ui-page>
+
     <app-ui-page title="Pomodoro Timer">
       <div class="flex flex-col items-center gap-6 py-4">
         <!-- Mode badge -->
@@ -74,7 +103,11 @@ export class TimerPage {
   isRunning = signal(false);
   secondsRemaining = signal(this.store.workMinutes() * 60);
 
+  rakibIsRunning = signal(false);
+  rakibSecondsRemaining = signal(25 * 60);
+
   private intervalId: ReturnType<typeof setInterval> | null = null;
+  private rakibIntervalId: ReturnType<typeof setInterval> | null = null;
 
   // Derived: total session length based on current mode + store prefs
   sessionDuration = computed(() =>
@@ -91,6 +124,13 @@ export class TimerPage {
     return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   });
 
+  rakibFormattedTime = computed(() => {
+    const s = this.rakibSecondsRemaining();
+    const minutes = Math.floor(s / 60);
+    const seconds = s % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  });
+
   // Derived: 0–100 percent elapsed (for the radial progress)
   progressPercent = computed(() => {
     const duration = this.sessionDuration();
@@ -98,8 +138,14 @@ export class TimerPage {
     return Math.round(((duration - this.secondsRemaining()) / duration) * 100);
   });
 
+  rakibProgressPercent = computed(() => {
+    const duration = 25 * 60;
+    return Math.round(((duration - this.rakibSecondsRemaining()) / duration) * 100);
+  });
+
   // Derived: button label changes based on running state
   startLabel = computed(() => (this.isRunning() ? 'Pause' : 'Start'));
+  rakibStartLabel = computed(() => (this.rakibIsRunning() ? 'Pause' : 'Start'));
 
   constructor() {
     // Effect: when the timer reaches zero while running, flip mode and reset
@@ -112,8 +158,19 @@ export class TimerPage {
       }
     });
 
-    // Always clean up the interval when this component is destroyed
-    this.destroyRef.onDestroy(() => this.clearTimer());
+    // Rakib timer auto-reset on completion
+    effect(() => {
+      if (this.rakibSecondsRemaining() === 0 && this.rakibIsRunning()) {
+        this.rakibPause();
+        this.rakibSecondsRemaining.set(25 * 60);
+      }
+    });
+
+    // Always clean up the intervals when this component is destroyed
+    this.destroyRef.onDestroy(() => {
+      this.clearTimer();
+      this.clearRakibTimer();
+    });
   }
 
   toggleTimer(): void {
@@ -141,10 +198,42 @@ export class TimerPage {
     this.secondsRemaining.set(this.sessionDuration());
   }
 
+  rakibToggleTimer(): void {
+    if (this.rakibIsRunning()) {
+      this.rakibPause();
+    } else {
+      this.rakibStart();
+    }
+  }
+
+  rakibStart(): void {
+    this.rakibIsRunning.set(true);
+    this.rakibIntervalId = setInterval(() => {
+      this.rakibSecondsRemaining.update((s) => s - 1);
+    }, 1000);
+  }
+
+  rakibPause(): void {
+    this.rakibIsRunning.set(false);
+    this.clearRakibTimer();
+  }
+
+  rakibReset(): void {
+    this.rakibPause();
+    this.rakibSecondsRemaining.set(25 * 60);
+  }
+
   private clearTimer(): void {
     if (this.intervalId !== null) {
       clearInterval(this.intervalId);
       this.intervalId = null;
+    }
+  }
+
+  private clearRakibTimer(): void {
+    if (this.rakibIntervalId !== null) {
+      clearInterval(this.rakibIntervalId);
+      this.rakibIntervalId = null;
     }
   }
 }
