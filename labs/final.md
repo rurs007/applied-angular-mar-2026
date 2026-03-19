@@ -47,6 +47,7 @@ git checkout -b lab/final-yourname
 
 ```bash
 npm ci
+npm run build:schematics
 npm run start
 # Open the app in the browser when the dev server is ready
 ```
