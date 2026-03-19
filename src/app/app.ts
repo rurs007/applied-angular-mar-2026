@@ -117,5 +117,7 @@ export class App {
   uiStore = inject(appUiStore);
   links = signal<(SectionLink & { icon: IconName })[]>([
     { path: '/demos', title: 'Signals', icon: 'lucideSignpostBig' },
+
+    { path: '/resources', title: 'Developer Resources', icon: 'lucideNewspaper' },
   ]);
 }

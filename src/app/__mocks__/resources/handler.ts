@@ -1,6 +1,6 @@
 import { delay, http, HttpResponse } from 'msw';
 
-const fakeResources = [
+let fakeResources = [
   {
     id: '1',
     title: 'Angular Site',
@@ -73,9 +73,32 @@ const fakeResources = [
   },
 ];
 
-export const handers = [
+export const resourceHandlers = [
   http.get('/api/resources', async () => {
     await delay();
     return HttpResponse.json(fakeResources);
+  }),
+
+  http.get('/api/resources/:id', async ({ params }) => {
+    await delay();
+    const resource = fakeResources.find((r) => r.id === params['id']);
+    if (!resource) {
+      return HttpResponse.json({ message: 'Resource not found' }, { status: 404 });
+    }
+    return HttpResponse.json(resource);
+  }),
+
+  http.post('/api/resources', async ({ request }) => {
+    await delay();
+    const body = await request.json() as { title: string; url: string };
+    if (new URL(body.url).hostname.includes('geico.com')) {
+      return HttpResponse.json(
+        { message: 'We do not allow links to our competitors.' },
+        { status: 400 },
+      );
+    }
+    const newResource = { id: crypto.randomUUID(), ...body };
+    fakeResources = [...fakeResources, newResource];
+    return HttpResponse.json(newResource, { status: 201 });
   }),
 ];

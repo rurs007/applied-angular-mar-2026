@@ -1,0 +1,51 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
+  "elements": [
+    {
+      "id": "bBBC-u1AIAfCcOUsQKXcu",
+      "type": "text",
+      "x": 390,
+      "y": 239,
+      "width": 775.6195068359375,
+      "height": 375,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a0",
+      "roundness": null,
+      "seed": 1917337672,
+      "version": 570,
+      "versionNonce": 1361967416,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1773864700695,
+      "link": null,
+      "locked": false,
+      "text": "Template Driven Forms -\n    - all in the html template - easy for easy stuff, harder for harder stuff.\n\n\nReactive Forms\n    - More in the code - still a little in the templates\n    - Very observable based. - have to subscribe, unsubscribe, etc.\n    - I actually mostly like these - especially after they added \"Typed forms\"\n    - Very hard to generalize - \n        - creating custom controls that you reuse is hard, limited.\n\n\nSignal Forms! \n    - still experimental.\n        (the httpresource thing, I'd be ok saying \"use it\" - this maybe too early)",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Template Driven Forms -\n    - all in the html template - easy for easy stuff, harder for harder stuff.\n\n\nReactive Forms\n    - More in the code - still a little in the templates\n    - Very observable based. - have to subscribe, unsubscribe, etc.\n    - I actually mostly like these - especially after they added \"Typed forms\"\n    - Very hard to generalize - \n        - creating custom controls that you reuse is hard, limited.\n\n\nSignal Forms! \n    - still experimental.\n        (the httpresource thing, I'd be ok saying \"use it\" - this maybe too early)",
+      "autoResize": true,
+      "lineHeight": 1.25
+    }
+  ],
+  "appState": {
+    "gridSize": 20,
+    "gridStep": 5,
+    "gridModeEnabled": false,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

@@ -25,6 +25,7 @@ import {
   lucideClock,
   lucideFileText,
   lucideTimer,
+  lucideNewspaper,
 } from '@ng-icons/lucide';
 
 export const icons = {
@@ -54,6 +55,7 @@ export const icons = {
   lucideClock,
   lucideFileText,
   lucideTimer,
+  lucideNewspaper,
 } as const;
 
 export type IconName = keyof typeof icons;

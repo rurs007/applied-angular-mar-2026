@@ -22,6 +22,13 @@ const realRoutes: Routes = [
         (r) => r.signalsdemosFeatureRoutes,
       ),
   },
+  {
+    path: 'resources',
+    loadChildren: () =>
+      import('./areas/resources/resources-landing/resources.routes').then(
+        (r) => r.resourcesFeatureRoutes,
+      ),
+  },
 ];
 
 const devRoutes: Routes = [

@@ -1,4 +1,11 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { PageLayout } from '@ht/shared/ui-common/layouts/page';
 import { counterStore } from '../stores/counter-store';
@@ -8,6 +15,7 @@ import { FizzBuzz } from '../fizz-buzz';
   selector: 'app-home-pages-counter',
   // this service should be created fresh every time you create this
   // component, and should be destroyed when you destroy this component
+  changeDetection: ChangeDetectionStrategy.OnPush, // todo: talk about this.
   providers: [],
   imports: [PageLayout, FizzBuzz],
   template: `<app-ui-page title="Counter">
