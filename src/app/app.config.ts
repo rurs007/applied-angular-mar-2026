@@ -1,7 +1,6 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import {
   PreloadAllModules,
-  PreloadingStrategy,
   provideRouter,
   withComponentInputBinding,
   withExperimentalAutoCleanupInjectors,

@@ -1,7 +1,7 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { form, FormField, FormRoot, minLength, required } from '@angular/forms/signals';
 import { PageLayout } from '@ht/shared/ui-common/layouts/page';
 import { ResourceApiCreateModel } from '../types';
-import { form, FormField, FormRoot, minLength, required } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-resources-pages-add',
