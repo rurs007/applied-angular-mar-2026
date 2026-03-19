@@ -9,16 +9,18 @@
 
 ### Morning: Context and Philosophy
 
-The day started with a wide-angle view of *why Angular exists* and what it's actually for. The core framing: Angular is for building **applications** (things with local state and code that processes that data), not web sites or server-side web applications. SPAs should be treated as an advanced tool — not the default — for UIs that genuinely can't be built well with simpler approaches.
+The day started with a wide-angle view of _why Angular exists_ and what it's actually for. The core framing: Angular is for building **applications** (things with local state and code that processes that data), not web sites or server-side web applications. SPAs should be treated as an advanced tool — not the default — for UIs that genuinely can't be built well with simpler approaches.
 
 A significant chunk of the morning was spent on **what Angular actually is** at a technical level:
+
 - TypeScript + HTML templates + CSS, wired together by `@angular/*` packages via decorators
 - The decorator system (`@Component`, `@Directive`, etc.) as "hooks" into the Angular runtime
-- The distinction between *general-purpose* libraries (rxjs, date-fns — usable anywhere) and *Angular-specific* libraries (`@ngrx/signals`, `@ng-icon`) that declare Angular as a peer dependency
+- The distinction between _general-purpose_ libraries (rxjs, date-fns — usable anywhere) and _Angular-specific_ libraries (`@ngrx/signals`, `@ng-icon`) that declare Angular as a peer dependency
 
 ### The Development Environment
 
 Emphasis on reducing friction for the whole team:
+
 - `.vscode/extensions.json` — shared team extension recommendations
 - `.vscode/settings.json` — shared editor settings
 - `.vscode/typescript.code-snippets` — boilerplate snippets for common patterns
@@ -33,6 +35,7 @@ The "three dueling tyrants": `tsconfig`, `eslint.config.js`, and `.prettierrc` �
 ### Architecture and Structure
 
 Walkthrough of the project structure under `src/app/areas/`:
+
 - Feature areas (`home`, `profile`, `signalsdemos`, etc.) — code organized by business capability, not technical type
 - `shared/` for genuinely cross-cutting code
 - [Sheriff](https://www.npmjs.com/package/@softarc/sheriff) (`sheriff.config.ts`) enforcing the dependency boundaries: feature areas must not import from each other
@@ -58,7 +61,7 @@ A new `signalsdemos` feature area was scaffolded via the schematic, setting up t
 
 ### Morning: Review + Signals Introduction
 
-Started with a review of Day 1, syncing everyone's code state to the main branch, then dove into signals — *using* them first before theorizing about *why*.
+Started with a review of Day 1, syncing everyone's code state to the main branch, then dove into signals — _using_ them first before theorizing about _why_.
 
 ### Basic Signals
 
@@ -79,6 +82,7 @@ export class CounterPage {
 ```
 
 Key points covered:
+
 - `signal(initialValue)` — writable signal
 - `.set(value)` — direct replacement
 - `.update(fn)` — derive new value from current
@@ -95,7 +99,7 @@ export class CounterPage {
 
   constructor() {
     effect(() => {
-      this.title.setTitle(this.emoji());  // re-runs whenever emoji() changes
+      this.title.setTitle(this.emoji()); // re-runs whenever emoji() changes
     });
   }
 
@@ -151,8 +155,10 @@ export const counterStore = signalStore(
     reset: () => patchState(store, { current: 0 }),
   })),
   withHooks({
-    onInit() { /* could load saved state from API here */ },
-    onDestroy() { },
+    onInit() {
+      /* could load saved state from API here */
+    },
+    onDestroy() {},
   }),
 );
 ```
@@ -170,7 +176,8 @@ export class CounterPage {
 
 A `PrefsPage` was added to the `signalsdemos` area — it lets the user pick the "by" value (1, 3, or 5). Both `CounterPage` and `PrefsPage` inject the same `counterStore`, demonstrating how the store is shared.
 
-Discussion of *where* to provide a store:
+Discussion of _where_ to provide a store:
+
 - `providers: [counterStore]` on a component → fresh instance scoped to that component
 - Provided at the route level → shared across all components in that route subtree
 - Provided at `ApplicationConfig` level → singleton for the whole app
@@ -182,6 +189,7 @@ Discussion of *where* to provide a store:
 ### Morning: Lab Prep + Lab
 
 The day began with some housekeeping:
+
 - Icons were added to `ui-common/icons/types.ts`
 - The `feature-landing` schematic was fixed (it had a bug)
 - Lab files were committed: `labs/counter.md`, `labs/pomodoro.md`, `labs/text-analyzer.md`
@@ -207,7 +215,7 @@ Before building the API layer, **Mock Service Worker** was introduced as the dev
 ```ts
 export const handlers = [
   http.get('/api/resources', async () => {
-    await delay();  // simulates real network latency
+    await delay(); // simulates real network latency
     return HttpResponse.json(fakeResources);
   }),
 ];
@@ -233,18 +241,18 @@ export class ListPage {
 
 ```html
 @if (linksResource.isLoading()) {
-  <span class="loading loading-spinner text-primary"></span>
+<span class="loading loading-spinner text-primary"></span>
 } @else {
-  <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
-    @for (link of linksResource.value(); track link.id) {
-      <div class="card bg-base-100 card-xs shadow-sm">
-        <h2 class="card-title text-xl text-accent">{{ link.title }}</h2>
-        <a [href]="link.url" target="_blank">Visit {{ link.url | extractHost: true }}</a>
-      </div>
-    } @empty {
-      <div class="alert alert-error">No resources found.</div>
-    }
+<div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
+  @for (link of linksResource.value(); track link.id) {
+  <div class="card bg-base-100 card-xs shadow-sm">
+    <h2 class="card-title text-xl text-accent">{{ link.title }}</h2>
+    <a [href]="link.url" target="_blank">Visit {{ link.url | extractHost: true }}</a>
   </div>
+  } @empty {
+  <div class="alert alert-error">No resources found.</div>
+  }
+</div>
 }
 ```
 
@@ -293,7 +301,7 @@ export class AddPage {
       submission: {
         action: async (form) => {
           const val = form().value();
-          console.log(val);  // TODO: wire to API
+          console.log(val); // TODO: wire to API
         },
         onInvalid: (form) => {
           form().errorSummary()[0]?.fieldTree().focusBoundControl();
@@ -315,9 +323,10 @@ An `Add2Page` was also built to show an alternative approach: using a shared `Fo
 
 ---
 
-## Day 4 — Thursday, March 19 *(tomorrow)*
+## Day 4 — Thursday, March 19 _(tomorrow)_
 
 Per the instructor notes (`26-3.19.md`), Thursday's plan includes:
+
 - Lab work (picking up from Wednesday, possibly the pomodoro or text-analyzer labs)
 - Review of what was covered
 - More complex state management
@@ -329,15 +338,124 @@ Per the instructor notes (`26-3.19.md`), Thursday's plan includes:
 
 ## Topics Reference
 
-| Topic | Where in Code |
-|---|---|
+| Topic                                     | Where in Code                                    |
+| ----------------------------------------- | ------------------------------------------------ |
 | Signal basics (`signal`, `set`, `update`) | `signalsdemos/.../counter.ts` (Tue before lunch) |
-| `computed` and `effect` | `signalsdemos/.../counter.ts` (Tue afternoon) |
-| `input.required<T>()` | `signalsdemos/.../fizz-buzz.ts` |
-| NgRx Signal Store | `signalsdemos/.../stores/counter-store.ts` |
-| Mock Service Worker | `__mocks__/resources/handler.ts` |
-| `httpResource` | `resources/.../pages/list.ts` |
-| Custom pipe | `resources/util-pipes/extract-host.ts` |
-| Signal forms | `resources/.../pages/add.ts`, `add2.ts` |
-| Feature schematic | `schematics/src/feature-landing/` |
-| Architecture boundaries | `sheriff.config.ts` |
+| `computed` and `effect`                   | `signalsdemos/.../counter.ts` (Tue afternoon)    |
+| `input.required<T>()`                     | `signalsdemos/.../fizz-buzz.ts`                  |
+| NgRx Signal Store                         | `signalsdemos/.../stores/counter-store.ts`       |
+| Mock Service Worker                       | `__mocks__/resources/handler.ts`                 |
+| `httpResource`                            | `resources/.../pages/list.ts`                    |
+| Custom pipe                               | `resources/util-pipes/extract-host.ts`           |
+| Signal forms                              | `resources/.../pages/add.ts`, `add2.ts`          |
+| Feature schematic                         | `schematics/src/feature-landing/`                |
+| Architecture boundaries                   | `sheriff.config.ts`                              |
+
+---
+
+## This Morning — Thursday, March 19 (AM)
+
+A quick list of what we covered and did this morning so students can pick up where we left off:
+
+- Continued the Resources feature work: wired the `Add` routes and discussed conditional routing based on auth state.
+- Implemented and inspected Mock Service Worker handlers for the user-links API (`GET /api/user/links`, `PUT`/`DELETE` for ignored and pinned endpoints).
+- Made the MSW DELETE endpoints idempotent (always return `204`) and initialized the mock store empty for predictable demos.
+- Reviewed `patchState` in `@ngrx/signals` stores: what it does, functional updaters vs. object updaters, and examples from the counter store.
+- Live-edited `home.ts` to compute links based on `authStore.isLoggedIn()` so the "Add a Link" item only shows when logged in.
+- Short Q&A and debugging: demoed how `httpResource` and `signalStore` interact in the Resources list and the shared counter store.
+
+If you want these bullets expanded into step-by-step notes or code links for students, I can add them now.
+
+---
+
+## This Morning — Thursday, March 19 (AM) — Expanded Notes & Examples
+
+Below are short, actionable notes and small examples so students can reproduce what we did this morning.
+
+- Resources feature: conditional Add route
+
+  We showed how to compute the list of section links and only expose the "Add a Link" item when the auth store reports a logged-in user. The final approach used a computed signal in the landing page:
+
+  ```ts
+  // src/app/areas/resources/resources-landing/internal/home.ts
+  store = inject(authStore);
+  links = computed<SectionLink[]>(() => {
+    const base: SectionLink[] = [{ title: 'List of Links', path: 'list' }];
+    if (this.store.isLoggedIn()) {
+      base.push({ title: 'Add a Link', path: 'add' });
+    }
+    base.push({ title: 'Add a Link Alt', path: 'add-2' });
+    return base;
+  });
+  ```
+
+  File: [src/app/areas/resources/resources-landing/internal/home.ts](src/app/areas/resources/resources-landing/internal/home.ts)
+
+- Mock Service Worker (MSW) handlers for user-links API
+
+  We implemented the following endpoints in the mock handler and used them in demos:
+  - `GET /api/user/links` — returns the current `userLinks` array
+  - `PUT /api/user/ignored-links` — marks a link as ignored (adds if missing)
+  - `DELETE /api/user/ignored-links/:id` — un-ignore (idempotent)
+  - `PUT /api/user/pinned-links` — mark pinned
+  - `DELETE /api/user/pinned-links/:id` — unpin (idempotent)
+
+  Example (GET):
+
+  ```ts
+  // src/app/__mocks__/user-links/handler.ts
+  http.get('/api/user/links', async () => {
+    await delay();
+    return HttpResponse.json(userLinks);
+  });
+  ```
+
+  Example (PUT ignored):
+
+  ```ts
+  http.put('/api/user/ignored-links', async ({ request }) => {
+    const { link } = await request.json();
+    // find or add and set ignored=true
+  });
+  ```
+
+  File: [src/app/**mocks**/user-links/handler.ts](src/app/__mocks__/user-links/handler.ts)
+
+- DELETE endpoints are idempotent (204)
+
+  For predictable demos we made both DELETE routes idempotent and always return a `204 No Content` response regardless of whether the id existed. This models safe HTTP semantics for delete operations and simplifies demo flows (no error handling branches needed in the UI during the class).
+
+- `patchState` refresher and examples
+
+  We reviewed `patchState` from `@ngrx/signals` and compared object updaters vs. functional updaters.
+  - Object updater (simple):
+
+    ```ts
+    patchState(store, { current: 0 });
+    ```
+
+  - Functional updater (safe when deriving from existing snapshot):
+
+    ```ts
+    patchState(store, (prev) => ({ current: prev.current + prev.by }));
+    ```
+
+  Key points:
+  - `patchState` performs a shallow merge of top-level keys; replace nested objects entirely.
+  - Functional updaters receive an untracked snapshot `prev` and avoid read/write races.
+  - See the counter store for a live example: [src/app/areas/signalsdemos/signalsdemos-landing/internal/stores/counter-store.ts](src/app/areas/signalsdemos/signalsdemos-landing/internal/stores/counter-store.ts)
+
+- How `httpResource` and `signalStore` interacted in demos
+
+  We demonstrated `httpResource` for the resources list and how changing signals can refire it. Example usage:
+
+  ```ts
+  linksResource = httpResource<ResourceApiItemModel[]>(() => '/api/resources');
+  ```
+
+  Combined pattern used in class:
+  - `httpResource` exposes `.value()`, `.isLoading()`, and `.error()` as signals
+  - `signalStore` holds UI preferences and local state (e.g., pinned/ignored lists)
+  - Templates read the resource signals and subscribe to store signals to drive UI behavior
+
+  Files to review: `src/app/areas/resources/.../pages/list.ts`, `src/app/areas/resources/.../data/user-links-api.ts`
